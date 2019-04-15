@@ -7,27 +7,36 @@ class Finder {
 
     static ArrayList<File> find(File directoryName, boolean otherDirectories, String fileName) {
         allFiles.clear();
-        return find2(directoryName, otherDirectories, fileName);
+
+        if (otherDirectories) return findRecursive(directoryName, fileName);
+        else return findNotRecursive(directoryName, fileName);
     }
 
-    private static ArrayList<File> find2(File directoryName, boolean otherDirectories, String fileName) {
+    private static ArrayList<File> findRecursive(File directoryName, String fileName) {
         File[] listFiles = directoryName.listFiles();
+
         assert listFiles != null;
         for (File dir : listFiles) {
-            if (otherDirectories) {
-                if (dir.isDirectory()) {
-                    find2(dir, true, fileName);
-                } else {
-                    if (dir.getName().equals(fileName))
-                        allFiles.add(dir);
-                }
+            if (dir.isDirectory()) {
+                findRecursive(dir, fileName);
             } else {
-                for (File dir2 : listFiles) {
-                    if (dir2.getName().equals(fileName))
-                        allFiles.add(dir);
-                }
+                if (dir.getName().equals(fileName))
+                    allFiles.add(dir);
             }
         }
+
+        return allFiles;
+    }
+
+    private static ArrayList<File> findNotRecursive(File directoryName, String fileName) {
+        File[] listFiles = directoryName.listFiles();
+
+        assert listFiles != null;
+        for (File dir : listFiles) {
+            if (dir.getName().equals(fileName))
+                allFiles.add(dir);
+        }
+
         return allFiles;
     }
 }

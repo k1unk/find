@@ -10,7 +10,7 @@ public class FinderLauncher {
     @Option(name = "-r", usage = "Find inside this directory")
     private boolean otherDirectories;
 
-    @Option(name = "-d", required = true, usage = "Directory")
+    @Option(name = "-d", usage = "Directory")
     private String directoryName;
 
     @Argument(required = true, usage = "Input file name")
@@ -24,7 +24,8 @@ public class FinderLauncher {
         CmdLineParser parser = new CmdLineParser(this);
         try {
             parser.parseArgument(args);
-        } catch (CmdLineException e) {
+        }
+        catch (CmdLineException e) {
             System.err.println(e.getMessage());
             System.err.println("find [-r] [-d directory] filename.txt");
             parser.printUsage(System.err);
