@@ -30,6 +30,8 @@ public class FinderLauncher {
             System.err.println("find [-r] [-d directory] filename.txt");
             parser.printUsage(System.err);
         }
-        System.out.println(Finder.find(new File(directoryName), otherDirectories, fileName));
+
+        Finder finder = new Finder();
+        System.out.println(finder.find(new File(directoryName), otherDirectories, fileName));
     }
 }

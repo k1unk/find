@@ -3,16 +3,14 @@ import java.util.ArrayList;
 
 class Finder {
 
-    private static ArrayList<File> allFiles = new ArrayList<>();
+    private ArrayList<File> allFiles = new ArrayList<>();
 
-    static ArrayList<File> find(File directoryName, boolean otherDirectories, String fileName) {
-        allFiles.clear();
-
+    ArrayList<File> find(File directoryName, boolean otherDirectories, String fileName) {
         if (otherDirectories) return findRecursive(directoryName, fileName);
         else return findNotRecursive(directoryName, fileName);
     }
 
-    private static ArrayList<File> findRecursive(File directoryName, String fileName) {
+    private ArrayList<File> findRecursive(File directoryName, String fileName) {
         File[] listFiles = directoryName.listFiles();
 
         assert listFiles != null;
@@ -28,7 +26,7 @@ class Finder {
         return allFiles;
     }
 
-    private static ArrayList<File> findNotRecursive(File directoryName, String fileName) {
+    private ArrayList<File> findNotRecursive(File directoryName, String fileName) {
         File[] listFiles = directoryName.listFiles();
 
         assert listFiles != null;
